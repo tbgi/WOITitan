@@ -2,7 +2,7 @@ Global $Paused
 HotKeySet("{PAUSE}", "TogglePause")
 hotkeyset("{F11}", "Term")
 
-$win_title = "Battle of Immortals- (Aquarius: Realm 4 )"
+$win_title = "War of Immortals- (Titan )"
 
 WinActivate($win_title, "")
 WinSetOnTop($win_title, "", 0)
@@ -18,7 +18,7 @@ $step = 1
 ;farbe vom Mob
 $color = 0x9465ce
 Sleep(5000)
-$message = "Ion DMG Buff Route TitanThron 2Mann"
+$message = "DMG Buff Route TitanThron 2Mann"
 $height = 38
 update_splash()
 Sleep(500)
