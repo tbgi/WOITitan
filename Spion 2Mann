@@ -1,0 +1,172 @@
+Global $Paused
+HotKeySet("{LEFT}", "TogglePause")
+hotkeyset("{RIGHT}", "Term")
+
+$win_title = "WoI Online (Valhalla: Realm 4 )"
+
+WinActivate($win_title, "")
+WinSetOnTop($win_title, "", 0)
+
+$char_found = 0
+$mob_found = 0
+$mob_alive = 0
+$char_alive = 0
+$char2_found = 0
+$char1_found = 0
+$width = 250
+$height = 38
+
+;colorVariance zahl zwischen 5 und 15
+$colourVariance = 10
+$step = 1
+;farbe vom Mob
+$color = 0x00FF00
+$color2 = 0x5e5e5e
+Sleep(5000)
+$message = "Zwei Mann Spion"
+$height = 38
+update_splash()
+Sleep(500)
+
+While 1
+	Sleep(Int(Random(500,1000)))
+
+	$message = "keiner da"
+    $height = 38
+	update_splash()
+   ;Rechte Seite des Chars nach Mob suchen
+	FindMobLeft()
+	If $char_found = 1 Then
+	$message = "Spion"
+    update_splash()
+	Sleep(200)
+    Send ("{PAUSE}")
+	Sleep(500)
+	M()
+	Sleep(200)
+	Send ("z")
+	Sleep(200)
+	MouseMove(920,666) ; Radsius ein
+	Sleep(200)
+	LeftClick()
+	Sleep(500)
+	Send ("z")
+	Sleep(500)
+	FindMob1()
+	While $char1_found = 1
+	$message = "Spion noch da"
+	update_splash()
+	Sleep(20000)
+	FindMob2()
+	Sleep(200)
+	If $char_found = 0 Then ExitLoop
+	WEnd
+ EndIf
+
+	WEnd
+
+
+Func FindMobLeft()
+;PixelSearch ( left, top, right, bottom, color , colourVariance, step
+$pos = PixelSearch ( 1451, 412, 1641, 677, $color, $colourVariance, $step)
+$char_found = 0
+If Not @error Then
+	;MouseMove($pos[0] , $pos[1]+10)
+	;LeftClick()
+	$char_found = 1
+	Sleep(500)
+	EndIf
+ EndFunc
+
+ Func FindMob1()
+;PixelSearch ( left, top, right, bottom, color , colourVariance, step
+$pos = PixelSearch ( 1451, 412, 1641, 677, $color, $colourVariance, $step)
+$char1_found = 0
+If Not @error Then
+	$char1_found = 1
+	Sleep(500)
+	EndIf
+ EndFunc
+
+Func FindMob2()
+;PixelSearch ( left, top, right, bottom, color , colourVariance, step
+$pos = PixelSearch ( 1451, 412, 1641, 677, $color, $colourVariance, $step)
+$char2_found = 0
+If  @error Then
+	$char2_found = 1
+	Sleep (200)
+	Send ("z")
+	Sleep(200)
+	MouseMove(920,666) ; Radius aus
+	Sleep(200)
+	LeftClick()
+	Sleep(200)
+	Send ("z")
+	Sleep(200)
+	Send ("{PAUSE}")
+	Sleep(200)
+	FindMobLeft()
+	While $char_found = 0
+	$message = "Spion weg"
+	update_splash()
+	Sleep(200)
+	FindMobLeft()
+	If $char_found = 0 Then ExitLoop
+	WEnd
+	EndIf
+EndFunc
+
+Func M()
+	$check_pix = PixelGetColor( 4908, 031 )
+	$m_found = 0
+	;MouseMove(1059,378)
+	;Sleep(2000)
+	;MsgBox(0,"The color is", ($check_pix))
+	If ($check_pix) == 14720771 Then
+	$m_found = 1
+	Sleep(200)
+	MouseMove(1192,277)
+	Sleep(200)
+	LeftClick()
+	Sleep(200)
+	EndIf
+EndFunc
+
+Func maus()
+ Sleep(400)
+MouseMove(866,134)
+Sleep(400)
+LeftClick()
+Sleep(400)
+EndFunc
+
+Func LeftClick()
+MouseDown("left")
+Sleep(200)
+MouseUp("left")
+Sleep(100)
+EndFunc
+
+Func RightClick()
+MouseDown("right")
+Sleep(200)
+MouseUp("right")
+EndFunc
+
+Func TogglePause()
+    $Paused = NOT $Paused
+    While $Paused
+        sleep(200)
+        ToolTip('Script is "Paused"',0,0)
+    WEnd
+    ToolTip("")
+EndFunc
+
+; Function to exit script
+func Term ()
+   exit
+Endfunc
+
+func update_splash ()
+   SplashTextOn( "", $message , $width , $height ,650 ,0 , 17)
+Endfunc
