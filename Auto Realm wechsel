@@ -1,0 +1,31 @@
+Func R1()
+  Sleep(400)
+	MouseMove(1660,996);Cord für System
+	Sleep(400)
+	LeftClick()
+	Sleep(400)
+	MouseMove(839,531);Cords für den Realm wechsel
+	Sleep(400)
+	LeftClick()
+	Sleep(400)
+	MouseMove(788,387);1.Realm in der Liste
+	Sleep(400)
+	LeftClick()
+	Sleep(400)
+	MouseMove(848,690);Bestätigen des Realmwechsels
+	Sleep(400)
+	LeftClick()
+	Sleep(17000); Zeit für realmwechsel
+	Send("z"); Kampfhilfe
+	Sleep(400)
+	MouseMove(1026,806);Aktivieren der Kampfhilfe
+	Sleep(400)
+	LeftClick()
+	Sleep(400)
+	MouseMove(884,555); Abfrage für KampfH einschalten JA
+	Sleep(200)
+	LeftClick()
+	Sleep(200)
+	Send("z");Fenster der KampfH schließen
+	Sleep(200)
+EndFunc
